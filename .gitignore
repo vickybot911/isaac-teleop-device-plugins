@@ -1,0 +1,12 @@
+# Local build dirs
+build-*/
+build/
+
+# IDE/editor
+.vscode/
+
+# Local CMake user presets
+CMakeUserPresets.json
+
+# Vendor Manus SDK (user-provided; do not commit)
+vendor/manus/ManusSDK/

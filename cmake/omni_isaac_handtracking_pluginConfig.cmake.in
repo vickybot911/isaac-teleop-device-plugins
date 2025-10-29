@@ -1,0 +1,11 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# This package exposes targets in the namespace omni_isaac_handtracking_plugin::
+# Manus SDK is not located by this package; consumers should provide it if needed.
+
+include("${CMAKE_CURRENT_LIST_DIR}/omni_isaac_handtracking_pluginTargets.cmake")
+
+# Convenience variable for includes
+set(omni_isaac_handtracking_plugin_INCLUDE_DIRS "${PACKAGE_INCLUDE_INSTALL_DIR}")
