@@ -10,6 +10,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "BUILD_MANUS_PLUGIN": "ON",
+        "BUILD_HAPLY_PLUGIN": "OFF",
         "MANUS_SDK_ROOT": "${sourceDir}/vendor/manus/ManusSDK"
       }
     },
@@ -26,12 +27,53 @@
       "inherits": "linux-manus-default",
       "binaryDir": "${sourceDir}/build-manus-release",
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "linux-haply-default",
+      "displayName": "Linux Haply Default (RelWithDebInfo)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-haply-default",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "BUILD_MANUS_PLUGIN": "OFF",
+        "BUILD_HAPLY_PLUGIN": "ON"
+      }
+    },
+    {
+      "name": "linux-haply-debug",
+      "displayName": "Linux Haply Debug",
+      "inherits": "linux-haply-default",
+      "binaryDir": "${sourceDir}/build-haply-debug",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "linux-haply-release",
+      "displayName": "Linux Haply Release",
+      "inherits": "linux-haply-default",
+      "binaryDir": "${sourceDir}/build-haply-release",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "linux-all-default",
+      "displayName": "Linux All Plugins Default (RelWithDebInfo)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build-all-default",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "BUILD_MANUS_PLUGIN": "ON",
+        "BUILD_HAPLY_PLUGIN": "ON",
+        "MANUS_SDK_ROOT": "${sourceDir}/vendor/manus/ManusSDK"
+      }
     }
   ],
   "buildPresets": [
-    { "name": "manus-default", "configurePreset": "linux-manus-default" },
-    { "name": "manus-debug",   "configurePreset": "linux-manus-debug" },
-    { "name": "manus-release", "configurePreset": "linux-manus-release" }
+    { "name": "manus-default",  "configurePreset": "linux-manus-default" },
+    { "name": "manus-debug",    "configurePreset": "linux-manus-debug" },
+    { "name": "manus-release",  "configurePreset": "linux-manus-release" },
+    { "name": "haply-default",  "configurePreset": "linux-haply-default" },
+    { "name": "haply-debug",    "configurePreset": "linux-haply-debug" },
+    { "name": "haply-release",  "configurePreset": "linux-haply-release" },
+    { "name": "all-default",    "configurePreset": "linux-all-default" }
   ],
   "testPresets": []
 }
