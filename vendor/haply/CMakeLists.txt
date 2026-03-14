@@ -44,6 +44,25 @@ set_target_properties(isaac_haply_plugin PROPERTIES
 add_library(isaac::haply_plugin ALIAS isaac_haply_plugin)
 
 
+# Unit tests
+if(BUILD_TESTING)
+  add_executable(HaplyPluginTest
+    tests/HaplyPluginTest.cpp
+  )
+  target_include_directories(HaplyPluginTest PRIVATE
+    ${ISAAC_HANDTRACKING_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party
+  )
+  target_link_libraries(HaplyPluginTest PRIVATE isaac::haply_plugin Threads::Threads)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(HaplyPluginTest PRIVATE -Wall -Wextra -Wpedantic)
+  endif()
+  enable_testing()
+  add_test(NAME HaplyPluginTest COMMAND HaplyPluginTest)
+endif()
+
+
 # CLI tool to print Haply tracker output
 add_executable(HaplyHandTrackerPrinter
   HaplyHandTrackerPrinter.cpp

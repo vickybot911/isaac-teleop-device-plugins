@@ -9,6 +9,9 @@ project(omni_isaac_handtracking_plugin
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
+# Enable CTest / BUILD_TESTING option
+include(CTest)
+
 # Place all build outputs in a clean bin/lib layout
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
