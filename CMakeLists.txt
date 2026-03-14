@@ -28,6 +28,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 option(BUILD_MANUS_PLUGIN "Build the Manus plugin under vendor/manus/" ON)
 option(COPY_MANUS_RUNTIME_IN_BUILD "Copy Manus SDK runtime into build lib directory" OFF)
+option(BUILD_HAPLY_PLUGIN "Build the Haply plugin under vendor/haply/" ON)
 
 # RPATH policy: use $ORIGIN in build tree and install tree; don't bake absolute paths
 set(CMAKE_BUILD_RPATH_USE_ORIGIN ON)
@@ -70,6 +71,10 @@ if(BUILD_MANUS_PLUGIN)
   add_subdirectory(vendor/manus)
 endif()
 
+if(BUILD_HAPLY_PLUGIN)
+  add_subdirectory(vendor/haply)
+endif()
+
 
 # Developer utilities (formatting, setup)
 include(cmake/ClangFormat.cmake OPTIONAL)
@@ -105,6 +110,22 @@ endif()
 
 if(TARGET ManusHandTrackerPrinter)
   install(TARGETS ManusHandTrackerPrinter
+    EXPORT ${_EXPORT_SET}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  )
+endif()
+
+if(TARGET isaac_haply_plugin)
+  install(TARGETS isaac_haply_plugin
+    EXPORT ${_EXPORT_SET}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+  )
+endif()
+
+if(TARGET HaplyHandTrackerPrinter)
+  install(TARGETS HaplyHandTrackerPrinter
     EXPORT ${_EXPORT_SET}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
